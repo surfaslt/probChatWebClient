@@ -206,7 +206,7 @@
   <nav class="navbar navbar-default" id="menuBar">
   <div class="container-fluid" style="background-color: #005c94;border-color: transparent;">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#" style="color:white"><span class="probchat-logo">ProbChat</span></a>
+      <a class="navbar-brand" href="/" style="color:white"><span class="probchat-logo">ProbChat</span></a>
     </div>
   </div>
 </nav>
@@ -315,15 +315,10 @@ Your browser does not support the audio element.
       // in the example above, assign the result
       var timeoutHandle;
   $(document).ready(function(){
-      /*$.get( "http://probchat.tk/a/api/problem-categories", function( data ) {
-        console.log("data: ", data);
-        console.log( "Load was performed." );
+      $.get( "http://probchat.tk/a/api/problem-categories", function( data ) {
         problemNames = data.results;
         setUpFirstPage();
-      });*/
-      
-      problemNames = [{"id":"sexual","caption":"Sexual harassment"},{"id":"racial","caption":"Racial harassment"},{"id":"personal","caption":"Personal harassment"},{"id":"bullying","caption":"Bullying"},{"id":"sexual_orientation","caption":"Harassment on grounds of sexual orientation"},{"id":"disabled_people","caption":"Harassment of disabled people"},{"id":"age","caption":"Age harassment"},{"id":"stalking","caption":"Stalking"}];
-      setUpFirstPage();
+      });
       
       $('#anotherProblem').on('click', function() {
           resetEverything();
