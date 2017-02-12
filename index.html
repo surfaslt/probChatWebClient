@@ -14,20 +14,16 @@
     width: 300px;
     height: 300px;
   }
-
   audio{
     display:none;
   }
-
   .redBordersOnHover{
     border-style: solid;
     border-color: lightgrey;
   }
-
   .redBordersOnHover:hover{
     border-color: red;
   }
-
   .btn-xlg {
     padding: 18px 28px;
     font-size: 53px;
@@ -36,45 +32,34 @@
        -moz-border-radius: 8px;
             border-radius: 8px;
   }
-
   .secondPage{
     display:none;
   }
-
   .thirdPage{
     display:none;
   }
-
   .loadingPage{
     display:none;
   }
-
   .unimplementedPage{
     display:none;
   }
-
   .navbar2{
     display:none;
   }
-
   .navBarEl1{
     display:none;
   }
-
   .navBarEl2{
     display:none;
   }
-
   .navBarEl3{
     display:none;
   }
-
   .navBarEl4{
     display:none;
   }
-
   /* not my code lol */
-
     .conversation-wrap
     {
         box-shadow: -2px 0 3px #ddd;
@@ -87,14 +72,11 @@
         padding:5px;
         border-bottom:1px solid #ddd;
         margin:0;
-
     }
-
     .message-wrap
     {
         box-shadow: 0 0 3px #ddd;
         padding:0;
-
     }
     .msg
     {
@@ -109,12 +91,10 @@
         height:400px;
         overflow: auto;
     }
-
     .time
     {
         color:#bfbfbf;
     }
-
     .send-wrap
     {
         border-top: 1px solid #eee;
@@ -122,38 +102,31 @@
         padding:10px;
         /*background: #f8f8f8;*/
     }
-
     .send-message
     {
         resize: none;
     }
-
     .highlight
     {
         background-color: #f7f7f9;
         border: 1px solid #e1e1e8;
     }
-
     .send-message-btn
     {
         border-top-left-radius: 0;
         border-top-right-radius: 0;
         border-bottom-left-radius: 0;
-
         border-bottom-right-radius: 0;
     }
     .btn-panel
     {
         background: #f7f7f9;
     }
-
     .btn-panel .btn
     {
         color:#b8b8b8;
-
         transition: 0.2s all ease-in-out;
     }
-
     .btn-panel .btn:hover
     {
         color:#666;
@@ -164,24 +137,19 @@
         background: #f8f8f8;
         box-shadow: 0 0 1px #ddd;
     }
-
     .btn-panel-conversation .btn,.btn-panel-msg .btn
     {
-
         background: #f8f8f8;
     }
     .btn-panel-conversation .btn:first-child
     {
         border-right: 1px solid #ddd;
     }
-
     .msg-wrap .media-heading
     {
         color:#003bb3;
         font-weight: 700;
     }
-
-
     .msg-date
     {
         background: none;
@@ -191,8 +159,6 @@
         box-shadow: none;
         border-bottom: 1px solid #ddd;
     }
-
-
     body::-webkit-scrollbar {
         width: 12px;
     }
@@ -202,14 +168,12 @@
     ::-webkit-scrollbar {
         width: 6px;
     }
-
     /* Track */
     ::-webkit-scrollbar-track {
         -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
 /*        -webkit-border-radius: 10px;
         border-radius: 10px;*/
     }
-
     /* Handle */
     ::-webkit-scrollbar-thumb {
 /*        -webkit-border-radius: 10px;
@@ -220,7 +184,6 @@
     ::-webkit-scrollbar-thumb:window-inactive {
         background: #ddd; 
     }
-
   /* not my code lol */
   </style>
 </head>
@@ -299,7 +262,7 @@
   <div class="row secondPage">
     <div class="col-sm-1"></div>
     <div class="col-sm-10">
-      <button type="button" class="btn btn-primary btn-block" onclick="setUpFirstPage();"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Choose another problem</button>
+      <button type="button" class="btn btn-primary btn-block" onclick="resetEverything();"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Choose another problem</button>
     </div>
     <div class="col-sm-1"></div>
   </div>
@@ -326,9 +289,6 @@ Your browser does not support the audio element.
 </audio>
 
 <script>
-
-
-
   var problemNames,
       problemImg,
       problemIndex,
@@ -342,7 +302,6 @@ Your browser does not support the audio element.
       isSendOnEnter = true;
       // in the example above, assign the result
       var timeoutHandle;
-
   $(document).ready(function(){
       $.get( "http://probchat.tk/a/api/problem-categories", function( data ) {
         console.log("data: ", data);
@@ -351,6 +310,16 @@ Your browser does not support the audio element.
         setUpFirstPage();
       });
   });
+
+  function resetEverything(){
+    if(conn.OPEN == 1){
+      //conn.close();
+      conn.send(JSON.stringify({
+        action: 'disconnect',
+      }));
+    }
+    setUpFirstPage();
+  }
       
   function setUpFirstPage(){
     $("#firstPageProblemHolder").empty();
@@ -364,7 +333,6 @@ Your browser does not support the audio element.
     }
     showFirstStage();
   }
-
   function setUpSecondPage(){
     console.log($("#secondPageJumboImg"));
     $("#secondPageJumboImg").attr("src", "images/" + problemNames[problemIndex].id + "Problem.jpg");
@@ -374,7 +342,6 @@ Your browser does not support the audio element.
     $("#msgArea").empty();
     showSecondStage();
   }
-
   function setUpLoadingPage(){
     console.log($("#loadingPageJumboImg"));
     $("#loadingPageJumboImg").attr("src", "images/" + problemNames[problemIndex].id + "Problem.jpg");
@@ -383,7 +350,6 @@ Your browser does not support the audio element.
     $("#loadingPageJumboText").append('<h3>'+problemNames[problemIndex].caption+' problems</h3><br /><p>Please wait until we find somebody with the same problem</p><p><i class="fa fa-spinner fa-spin" style="font-size:48px"></i></p>');
     showLoadingStage();
   }
-
   function showFirstStage(){
     $(firstPage).fadeIn();
     if(typeof problem != 'undefined'){
@@ -396,12 +362,10 @@ Your browser does not support the audio element.
     $(".navbar1").hide();
     $(".navbar2").hide();
   }  
-
   function problemSelected(theProblemIndex){
     problemIndex = theProblemIndex;
     setUpLoadingPage();
   }
-
   function showSecondStage(){
     $(firstPage).hide();
     $(thirdPage).hide();
@@ -415,7 +379,6 @@ Your browser does not support the audio element.
     $(".navBarEl1").fadeIn();
     $(".navBarEl2").fadeIn();
   }
-
   function showThirdStage(){
     $(secondPage).hide();
     $(loadingPage).hide();
@@ -426,20 +389,17 @@ Your browser does not support the audio element.
     $(".navBarEl3").fadeIn();
     $(thirdPage).fadeIn();
   }
-
   function showLoadingStage(){
     $(firstPage).hide();
     $(thirdPage).hide();
     $(".secondPage").hide();
     $(loadingPage).fadeIn();
-
     conn.send(JSON.stringify({
         id: problemNames[problemIndex].id,
         action: 'matching',
     }));
     //timeoutHandle = window.setTimeout(setUpSecondPage, 5000);
   }
-
   function nextChatterClicked(){
     if(!$("#nextChatterBtn").hasClass("disabled")){
       notesNumberCurrent += 1;
@@ -450,18 +410,19 @@ Your browser does not support the audio element.
       fixMusicSrc();
     }
   }
-
   var conn = new WebSocket('ws://probchat.tk:8080');
   conn.onopen = function(e) {
     console.log("Connection established!");
   };
 
+  conn.onclose = function(e) {
+    console.log("Connection closed!");
+  };
   //this is fired when gege sends smth to me
   conn.onmessage = function(e) {
       //console.log(e.data);
       parseMessageFromServer(e);
   };
-
  function messageReceived(messageArray){
     console.log("message received: ",messageArray);
     document.getElementById("messageReceivedAudio").play();
@@ -470,7 +431,6 @@ Your browser does not support the audio element.
                         '<div class="media-body"><small class="pull-right time"><i class="fa fa-clock-o"></i> ' + getTime() + '</small><h5 class="media-heading">Person with same problem</h5><small class="col-lg-10">' + messageArray[i].msg + '</small></div></div>');
     scrollToBottom();
   }
-
   function sendMessage(){
     var message = $("#typingSection").val();
     $("#typingSection").val("");
@@ -479,26 +439,21 @@ Your browser does not support the audio element.
         action: 'message',
     }));
     console.log("message sent: ",message);
-
     document.getElementById("messageSentAudio").play();
-
     $("#msgArea").append('<div class="media msg"><a class="pull-left"><img class="media-object" data-src="holder.js/64x64" alt="64x64" style="width: 32px; height: 32px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACqUlEQVR4Xu2Y60tiURTFl48STFJMwkQjUTDtixq+Av93P6iBJFTgg1JL8QWBGT4QfDX7gDIyNE3nEBO6D0Rh9+5z9rprr19dTa/XW2KHl4YFYAfwCHAG7HAGgkOQKcAUYAowBZgCO6wAY5AxyBhkDDIGdxgC/M8QY5AxyBhkDDIGGYM7rIAyBgeDAYrFIkajEYxGIwKBAA4PDzckpd+322243W54PJ5P5f6Omh9tqiTAfD5HNpuFVqvFyckJms0m9vf3EY/H1/u9vb0hn89jsVj8kwDfUfNviisJ8PLygru7O4TDYVgsFtDh9Xo9NBrNes9cLgeTybThgKenJ1SrVXGf1WoVDup2u4jFYhiPx1I1P7XVBxcoCVCr1UBfTqcTrVYLe3t7OD8/x/HxsdiOPqNGo9Eo0un02gHkBhJmuVzC7/fj5uYGXq8XZ2dnop5Mzf8iwMPDAxqNBmw2GxwOBx4fHzGdTpFMJkVzNB7UGAmSSqU2RoDmnETQ6XQiOyKRiHCOSk0ZEZQcUKlU8Pz8LA5vNptRr9eFCJQBFHq//szG5eWlGA1ywOnpqQhBapoWPfl+vw+fzweXyyU+U635VRGUBOh0OigUCggGg8IFK/teXV3h/v4ew+Hwj/OQU4gUq/w4ODgQrkkkEmKEVGp+tXm6XkkAOngmk4HBYBAjQA6gEKRmyOL05GnR99vbW9jtdjEGdP319bUIR8oA+pnG5OLiQoghU5OElFlKAtCGr6+vKJfLmEwm64aosd/XbDbbyIBSqSSeNKU+HXzlnFAohKOjI6maMs0rO0B20590n7IDflIzMmdhAfiNEL8R4jdC/EZIJj235R6mAFOAKcAUYApsS6LL9MEUYAowBZgCTAGZ9NyWe5gCTAGmAFOAKbAtiS7TB1Ng1ynwDkxRe58vH3FfAAAAAElFTkSuQmCC"></a>' +
                         '<div class="media-body"><small class="pull-right time"><i class="fa fa-clock-o"></i> ' + getTime() + '</small><h5 class="media-heading">You</h5><small class="col-lg-10">' + message + '</small></div></div>');
     scrollToBottom();
     $("#typingSection").focus();
   }
-
   function scrollToBottom(){
     $("#msgArea").scrollTop($("#msgArea")[0].scrollHeight);
   }
-
   function addZero(i) {
     if (i < 10) {
         i = "0" + i;
     }
     return i;
   }
-
   function getTime() {
       var d = new Date();
       var x = document.getElementById("demo");
@@ -507,7 +462,6 @@ Your browser does not support the audio element.
       var s = addZero(d.getSeconds());
       return h + ":" + m + ":" + s;
   }
-
   $("#typingSection").keyup(function(event){
     if(isShiftPressed){}
       else if(event.keyCode == 13){
@@ -519,25 +473,20 @@ Your browser does not support the audio element.
       isShiftPressed = false;
     }
   });
-
   $("#typingSection").keydown(function(event){
     if(event.keyCode == 16){
       isShiftPressed = true;
     }
   });
-
   $(window).resize(function(){
     
   });  
-
   function checkboxClicked(isChecked){
     isPubliclyAvailable = isChecked;
   }
-
   function sendOnEnterCheckboxUpdated(isChecked){
     isSendOnEnter = isChecked;
   }
-
   function parseMessageFromServer(e){
     var response = JSON.parse(e.data);
     switch(response['action']) {
@@ -557,7 +506,6 @@ Your browser does not support the audio element.
             break;
     }
   }
-
 </script>
 
 </body>
