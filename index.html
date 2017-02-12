@@ -262,7 +262,7 @@
   <div class="row secondPage">
     <div class="col-sm-1"></div>
     <div class="col-sm-10">
-      <button type="button" class="btn btn-primary btn-block" onclick="resetEverything();"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Choose another problem</button>
+      <button type="button" id="anotherProblem" class="btn btn-primary btn-block"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Choose another problem</button>
     </div>
     <div class="col-sm-1"></div>
   </div>
@@ -270,7 +270,7 @@
   <div class="row loadingPage">
     <div class="col-sm-1"></div>
     <div class="col-sm-10">
-      <button type="button" class="btn btn-primary btn-lg btn-block" onclick="setUpFirstPage();"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Cancel and choose another problem</button>
+      <button type="button" id="cancelAndNewProblem" class="btn btn-primary btn-lg btn-block"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Cancel and choose another problem</button>
     </div>
     <div class="col-sm-1"></div>
   </div>
@@ -309,15 +309,20 @@ Your browser does not support the audio element.
         problemNames = data.results;
         setUpFirstPage();
       });
+      
+      $('#anotherProblem').on('click', function() {
+          resetEverything();
+      });
+      $('#cancelAndNewProblem').on('click', function() {
+        resetEverything();
+        setUpFirstPage();
+      });
   });
 
   function resetEverything(){
-    if(conn.OPEN == 1){
-      //conn.close();
       conn.send(JSON.stringify({
-        action: 'disconnect',
+        action: 'quit',
       }));
-    }
     setUpFirstPage();
   }
       
@@ -411,6 +416,7 @@ Your browser does not support the audio element.
     }
   }
   var conn = new WebSocket('ws://probchat.tk:8080');
+
   conn.onopen = function(e) {
     console.log("Connection established!");
   };
