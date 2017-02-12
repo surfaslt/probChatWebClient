@@ -268,7 +268,7 @@
             
             <!-- ========================================= NOT MY CODE LOL ===========================================-->
 
-            <div class="msg-wrap" id="msgArea">
+            <div class="msg-wrap secondPage" id="msgArea">
 
 
             </div>
@@ -428,8 +428,9 @@ Your browser does not support the audio element.
   }
 
   function showLoadingStage(){
-    $(thirdPage).hide();
     $(firstPage).hide();
+    $(thirdPage).hide();
+    $(secondPage).hide();
     $(loadingPage).fadeIn();
 
     conn.send(JSON.stringify({
