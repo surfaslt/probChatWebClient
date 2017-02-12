@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link href="https://fonts.googleapis.com/css?family=Lobster|Oswald" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -18,11 +19,8 @@
     display:none;
   }
   .redBordersOnHover{
-    border-style: solid;
-    border-color: lightgrey;
-  }
-  .redBordersOnHover:hover{
-    border-color: red;
+    margin-bottom: 60px;
+    cursor: pointer;
   }
   .btn-xlg {
     padding: 18px 28px;
@@ -185,16 +183,33 @@
         background: #ddd; 
     }
   /* not my code lol */
+  
+  .probchat-logo {
+    font-family: Lobster;
+    font-size: 2em;
+  }
+  
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    color: white;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: white;
+}
   </style>
 </head>
 <body>
 
 <div class="container">
-  
-  <div class="jumbotron text-center firstPage">
-    <h1>Welcome to "ProbChat"!</h1>
-    <p>Please click on the problem you want to talk about!</p>
+  <nav class="navbar navbar-default" id="menuBar">
+  <div class="container-fluid" style="background-color: #005c94;border-color: transparent;">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#" style="color:white"><span class="probchat-logo">ProbChat</span></a>
+    </div>
   </div>
+</nav>
 
   <div class="jumbotron text-center loadingPage">
     <div class="row">
@@ -300,12 +315,15 @@ Your browser does not support the audio element.
       // in the example above, assign the result
       var timeoutHandle;
   $(document).ready(function(){
-      $.get( "http://probchat.tk/a/api/problem-categories", function( data ) {
+      /*$.get( "http://probchat.tk/a/api/problem-categories", function( data ) {
         console.log("data: ", data);
         console.log( "Load was performed." );
         problemNames = data.results;
         setUpFirstPage();
-      });
+      });*/
+      
+      problemNames = [{"id":"sexual","caption":"Sexual harassment"},{"id":"racial","caption":"Racial harassment"},{"id":"personal","caption":"Personal harassment"},{"id":"bullying","caption":"Bullying"},{"id":"sexual_orientation","caption":"Harassment on grounds of sexual orientation"},{"id":"disabled_people","caption":"Harassment of disabled people"},{"id":"age","caption":"Age harassment"},{"id":"stalking","caption":"Stalking"}];
+      setUpFirstPage();
       
       $('#anotherProblem').on('click', function() {
           resetEverything();
@@ -330,7 +348,7 @@ Your browser does not support the audio element.
       if(i%4 == 0) {
         $("#firstPageProblemHolder").append('<div class="row">');
       }
-        $("#firstPageProblemHolder").append('<div class="col-sm-3 redBordersOnHover" onclick="problemSelected('+ i +')"><h3>'+ problemNames[i].caption + '</h3><img src="images/' + problemNames[i].id + 'Problem.jpg" class="img-rounded img-responsive" alt="a trumpet picture"></div>');
+        $("#firstPageProblemHolder").append('<div class="col-sm-3 redBordersOnHover" onclick="problemSelected('+ i +')"><img src="images/' + problemNames[i].id + 'Problem.jpg" class="img-rounded img-responsive" alt="a trumpet picture"><h3>'+ problemNames[i].caption + '</h3></div>');
       if(i%4 == 3) $("#firstPageProblemHolder").append('<div />');
     }
     showFirstStage();
