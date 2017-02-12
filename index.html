@@ -194,9 +194,6 @@
   <div class="jumbotron text-center firstPage">
     <h1>Welcome to "ProbChat"!</h1>
     <p>Please click on the problem you want to talk about!</p>
-    <div class="checkbox">
-      <label><input type="checkbox" value="" onclick="checkboxClicked(this.checked);">Tick this to make the chat publicly available</label>
-    </div>
   </div>
 
   <div class="jumbotron text-center loadingPage">
@@ -243,10 +240,10 @@
 
             </div>
             <div class="btn-panel">
-                <div class="checkbox col-lg-3">
+                <div class="checkbox col-lg-3 col-xs-3">
                   <label><input type="checkbox" checked value="" onclick="sendOnEnterCheckboxUpdated(this.checked);">Send On Enter</label>
                 </div>
-                <a class="col-lg-4 text-right btn send-message-btn pull-right" role="button" onclick="sendMessage();"><i class="fa fa-plus"></i> Send Message</a>
+                <a class="col-lg-4 col-xs-4 text-right btn send-message-btn pull-right" role="button" onclick="sendMessage();"><i class="fa fa-plus"></i> Send Message</a>
             </div>
         </div>
 
@@ -343,7 +340,7 @@ Your browser does not support the audio element.
     $("#secondPageJumboImg").attr("src", "images/" + problemNames[problemIndex].id + "Problem.jpg");
     console.log($("#secondPageJumboImg"));
     $("#secondPageJumboText").empty();
-    $("#secondPageJumboText").append('<h3>'+problemNames[problemIndex].caption+' problems</h3><p>Here you go, we found you a problem mate! Feel free to discuss!</p>');
+    $("#secondPageJumboText").append('<h3>'+problemNames[problemIndex].caption+' problems</h3><p>Here you go, we found you a problem mate! Feel free to discuss!</p><div class="btn-group"><button type="button" class="btn btn-primary"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Like </button><button type="button" class="btn btn-primary"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> Dislike </button><button type="button" class="btn btn-primary"><i class="fa fa-flag-o" aria-hidden="true"></i> Report</button></div>');
     $("#msgArea").empty();
     showSecondStage();
   }
