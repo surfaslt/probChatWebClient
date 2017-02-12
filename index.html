@@ -330,7 +330,7 @@ Your browser does not support the audio element.
       if(i%4 == 0) {
         $("#firstPageProblemHolder").append('<div class="row">');
       }
-        $("#firstPageProblemHolder").append('<div class="col-sm-3 redBordersOnHover" onclick="problemSelected('+ i +')"><h3>'+ problemNames[i].caption + '</h3><img src="images/' + problemNames[i].id + 'Problem.jpg" class="img-rounded img-responsive" alt="a trumpet picture"></div>');
+        $("#firstPageProblemHolder").append('<div class="col-sm-3 redBordersOnHover" onclick="problemSelected('+ i +')"><h3>'+ problemNames[i].caption + '</h3><img src="images/' + problemNames[i].id + 'Problem.jpg" class="img-rounded img-responsive" alt="a' + problemNames[i].id + 'picture"></div>');
       if(i%4 == 3) $("#firstPageProblemHolder").append('<div />');
     }
     showFirstStage();
