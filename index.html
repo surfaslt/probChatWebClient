@@ -430,11 +430,11 @@ Your browser does not support the audio element.
   function showLoadingStage(){
     $(firstPage).hide();
     $(thirdPage).hide();
-    $(secondPage).hide();
+    $(".secondPage").hide();
     $(loadingPage).fadeIn();
 
     conn.send(JSON.stringify({
-        id: 'family',
+        id: problemNames[problemIndex].id,
         action: 'matching',
     }));
     //timeoutHandle = window.setTimeout(setUpSecondPage, 5000);
